@@ -12,8 +12,8 @@ export default function HomePage() {
     slug: p.slug,
     covering: p.specs.Covering ?? '—',
     propeller: p.specs.Propeller ?? '—',
-    weight: p.specs['Approx. weight'] ?? 'Minimum legal',
-    flight: p.specs['Target flight time'] ?? 'Competitive',
+    weight: p.specs['Approx. weight'] ?? '—',
+    flight: p.specs['Target flight time'] ?? '—',
   }));
 
   return (
