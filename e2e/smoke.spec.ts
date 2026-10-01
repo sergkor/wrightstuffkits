@@ -24,4 +24,8 @@ test('home → catalog search → product → cart drawer → persists', async (
   await expect(page.getByTestId('cart-count')).toHaveText('1');
   await page.getByTestId('cart-trigger').click();
   await expect(page.getByRole('dialog', { name: /your cart/i }).getByTestId('subtotal')).toHaveText('$12.99');
+  await expect(page.getByRole('dialog', { name: /your cart/i }).getByTestId('paypal-buttons')).toBeVisible();
+  await page.goto('/checkout/');
+  await expect(page.getByTestId('subtotal')).toHaveText('$12.99');
+  await expect(page.getByTestId('paypal-buttons')).toBeVisible();
 });

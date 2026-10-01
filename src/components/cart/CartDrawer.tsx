@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { PayPalCheckout } from '@/components/checkout/PayPalCheckout';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -34,7 +35,7 @@ export function CartDrawer() {
             <div className="space-y-3 p-4">
               <CartSummary lines={lines} />
               <ShippingNote />
-              <div data-testid="paypal-slot" />
+              <PayPalCheckout />
               <Button asChild variant="outline" className="w-full" onClick={close}>
                 <Link href="/checkout/">Review order</Link>
               </Button>
