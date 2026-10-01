@@ -43,13 +43,13 @@ export default function HomePage() {
           <table className="w-full text-sm">
             <thead className="bg-muted/50 text-left">
               <tr>
-                <th className="p-3">Kit</th><th className="p-3">Covering</th><th className="p-3">Propeller</th><th className="p-3">Weight</th><th className="p-3">Flight</th>
+                <th scope="col" className="p-3">Kit</th><th scope="col" className="p-3">Covering</th><th scope="col" className="p-3">Propeller</th><th scope="col" className="p-3">Weight</th><th scope="col" className="p-3">Flight</th>
               </tr>
             </thead>
             <tbody>
               {compare.map((r) => (
                 <tr key={r.slug} className="border-t">
-                  <td className="p-3 font-medium"><Link href={`/products/${r.slug}/`} className="underline-offset-2 hover:underline">{r.name}</Link></td>
+                  <th scope="row" className="p-3 font-medium text-left"><Link href={`/products/${r.slug}/`} className="underline-offset-2 hover:underline">{r.name}</Link></th>
                   <td className="p-3">{r.covering}</td><td className="p-3">{r.propeller}</td><td className="p-3">{r.weight}</td><td className="p-3">{r.flight}</td>
                 </tr>
               ))}

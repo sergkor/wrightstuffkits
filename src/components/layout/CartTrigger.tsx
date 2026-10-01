@@ -8,12 +8,13 @@ export function CartTrigger() {
   const count = useCartCount();
   const open = useCart((s) => s.open);
   return (
-    <Button variant="ghost" size="icon" aria-label={`Open cart, ${count} items`} onClick={open} data-testid="cart-trigger">
+    <Button variant="ghost" size="icon" aria-label={`Open cart, ${count} ${count === 1 ? 'item' : 'items'}`} onClick={open} data-testid="cart-trigger">
       <span className="relative">
         <ShoppingCart className="size-5" />
         {count > 0 && (
           <span
             data-testid="cart-count"
+            aria-hidden="true"
             className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground"
           >
             {count}

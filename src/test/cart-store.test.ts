@@ -77,4 +77,31 @@ describe('cart store', () => {
     await store.persist.rehydrate();
     expect(store.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 1 }]);
   });
+
+  it('still hydrates with an empty cart when storage getItem throws', async () => {
+    const broken: StateStorage = {
+      getItem: () => {
+        throw new Error('SecurityError');
+      },
+      setItem: () => {},
+      removeItem: () => {},
+    };
+    const store = createCartStore(broken);
+    await store.persist.rehydrate();
+    expect(store.getState().hasHydrated).toBe(true);
+    expect(store.getState().items).toEqual([]);
+  });
+
+  it('keeps working in memory when storage setItem throws', () => {
+    const full: StateStorage = {
+      getItem: () => null,
+      setItem: () => {
+        throw new Error('QuotaExceededError');
+      },
+      removeItem: () => {},
+    };
+    const store = createCartStore(full);
+    expect(() => store.getState().add('ADV-KIT')).not.toThrow();
+    expect(store.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 1 }]);
+  });
 });

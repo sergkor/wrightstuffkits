@@ -21,8 +21,20 @@ export function PayPalCheckout() {
   const router = useRouter();
   const shippingRef = useRef(defaultShippingOption().id);
   const [error, setError] = useState<string | null>(null);
+  // Set once a capture is classified as paid. clear() then unmounts the buttons while the SDK
+  // may still fire onError/onCancel; those must not tell the buyer the payment failed.
+  // The ref guards callbacks synchronously; the state mirror drives rendering.
+  const paidRef = useRef(false);
+  const [paid, setPaid] = useState(false);
 
-  if (lines.length === 0) return null;
+  if (lines.length === 0) {
+    if (!paid) return null;
+    return (
+      <div data-testid="paypal-buttons" className="space-y-2">
+        <p role="status" className="text-sm text-muted-foreground">Payment received, redirecting…</p>
+      </div>
+    );
+  }
   const cartKey = lines.map((l) => `${l.sku}:${l.qty}`).join('|');
 
   return (
@@ -58,7 +70,10 @@ export function PayPalCheckout() {
               details = await actions.order.capture();
             } catch (err) {
               const issue = (err as { details?: { issue?: string }[] })?.details?.[0]?.issue;
-              if (issue === 'INSTRUMENT_DECLINED') {
+              const declined =
+                issue === 'INSTRUMENT_DECLINED' ||
+                String((err as Error)?.message ?? err).includes('INSTRUMENT_DECLINED');
+              if (declined) {
                 setError(DECLINED_MSG);
                 return actions.restart();
               }
@@ -71,6 +86,8 @@ export function PayPalCheckout() {
             }
             // Only a completed (or pending) capture counts as paid; FAILED or a missing capture keeps the cart.
             if (status !== 'COMPLETED' && status !== 'PENDING') return fail();
+            paidRef.current = true;
+            setPaid(true);
             // Payment is taken from here on: a storage failure must never block clearing the cart or
             // navigating, and must never tell the buyer the payment failed. The confirmation page
             // falls back to "No recent order found" when the summary is missing.
@@ -83,8 +100,12 @@ export function PayPalCheckout() {
             close();
             router.push('/order/confirmed/');
           }}
-          onCancel={() => setError(null)}
+          onCancel={() => {
+            if (paidRef.current) return;
+            setError(null);
+          }}
           onError={() => {
+            if (paidRef.current) return;
             setError(FAILED_MSG);
             toast.error(FAILED_MSG);
           }}

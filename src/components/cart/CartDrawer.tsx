@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PayPalCheckout } from '@/components/checkout/PayPalCheckout';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCartLines } from '@/lib/cart/hooks';
 import { useCart } from '@/lib/cart/store';
 import { CartLineRow } from './CartLineRow';
@@ -21,6 +21,7 @@ export function CartDrawer() {
       <SheetContent side="right" className="flex w-full flex-col sm:max-w-md">
         <SheetHeader>
           <SheetTitle>Your cart</SheetTitle>
+          <SheetDescription className="sr-only">Items in your cart and checkout</SheetDescription>
         </SheetHeader>
         {lines.length === 0 ? (
           <p className="py-10 text-center text-muted-foreground">Your cart is empty.</p>

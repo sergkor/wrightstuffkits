@@ -19,6 +19,36 @@ export interface CartState {
   prune: () => void;
 }
 
+// Storage can be missing (SSR) or blocked (private mode, quota, site-data settings), and even
+// touching `localStorage` may throw a SecurityError. Every storage call goes through this guard so
+// a failure degrades to an in-memory cart instead of breaking add/remove or hydration.
+function guardStorage(inner: StateStorage): StateStorage {
+  return {
+    getItem: (k) => {
+      try {
+        return inner.getItem(k);
+      } catch {
+        return null;
+      }
+    },
+    setItem: (k, v) => {
+      try {
+        return inner.setItem(k, v);
+      } catch {
+        // ignore: the cart keeps working in memory
+      }
+    },
+    removeItem: (k) => {
+      try {
+        return inner.removeItem(k);
+      } catch {
+        // ignore
+      }
+    },
+  };
+}
+
+// The `typeof localStorage` checks run inside guardStorage's try, so a throwing accessor is caught.
 const browserStorage: StateStorage = {
   getItem: (k) => (typeof localStorage === 'undefined' ? null : localStorage.getItem(k)),
   setItem: (k, v) => {
@@ -30,7 +60,7 @@ const browserStorage: StateStorage = {
 };
 
 export function createCartStore(storage: StateStorage = browserStorage) {
-  return createStore<CartState>()(
+  const store = createStore<CartState>()(
     persist(
       (set, get) => ({
         items: [],
@@ -60,16 +90,19 @@ export function createCartStore(storage: StateStorage = browserStorage) {
       }),
       {
         name: CART_STORAGE_KEY,
-        storage: createJSONStorage(() => storage),
+        storage: createJSONStorage(() => guardStorage(storage)),
         partialize: (s) => ({ items: s.items }),
         skipHydration: true,
+        // `state` is undefined when rehydration fails; the store must still count as hydrated
+        // or the UI would wait forever. `store` is read lazily, after createStore has returned.
         onRehydrateStorage: () => (state) => {
           state?.prune();
-          state?.setHydrated();
+          store.setState({ hasHydrated: true });
         },
       },
     ),
   );
+  return store;
 }
 
 export const cartStore = createCartStore();
