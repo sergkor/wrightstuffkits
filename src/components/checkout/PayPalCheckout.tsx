@@ -1,4 +1,5 @@
 'use client';
+import type { OrderResponseBody } from '@paypal/paypal-js';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -47,27 +48,40 @@ export function PayPalCheckout() {
             return actions.order.patch(buildAmountPatch(lines, shippingRef.current));
           }}
           onApprove={async (_data, actions) => {
-            if (!actions.order) return;
+            const fail = () => {
+              setError(FAILED_MSG);
+              toast.error(FAILED_MSG);
+            };
+            if (!actions.order) return fail();
+            let details: OrderResponseBody;
             try {
-              const details = await actions.order.capture();
-              const capture = details.purchase_units?.[0]?.payments?.captures?.[0];
-              if (capture?.status === 'DECLINED') {
-                setError(DECLINED_MSG);
-                return actions.restart();
-              }
-              sessionStorage.setItem(LAST_ORDER_KEY, JSON.stringify(summarizeOrder(details, lines)));
-              clear();
-              close();
-              router.push('/order/confirmed/');
+              details = await actions.order.capture();
             } catch (err) {
               const issue = (err as { details?: { issue?: string }[] })?.details?.[0]?.issue;
               if (issue === 'INSTRUMENT_DECLINED') {
                 setError(DECLINED_MSG);
                 return actions.restart();
               }
-              setError(FAILED_MSG);
-              toast.error(FAILED_MSG);
+              return fail();
             }
+            const status = details.purchase_units?.[0]?.payments?.captures?.[0]?.status;
+            if (status === 'DECLINED') {
+              setError(DECLINED_MSG);
+              return actions.restart();
+            }
+            // Only a completed (or pending) capture counts as paid; FAILED or a missing capture keeps the cart.
+            if (status !== 'COMPLETED' && status !== 'PENDING') return fail();
+            // Payment is taken from here on: a storage failure must never block clearing the cart or
+            // navigating, and must never tell the buyer the payment failed. The confirmation page
+            // falls back to "No recent order found" when the summary is missing.
+            try {
+              sessionStorage.setItem(LAST_ORDER_KEY, JSON.stringify(summarizeOrder(details, lines)));
+            } catch {
+              // ignore: see above
+            }
+            clear();
+            close();
+            router.push('/order/confirmed/');
           }}
           onCancel={() => setError(null)}
           onError={() => {
