@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw product photos (not tracked; see docs/superpowers/plans)
+/inventory/
+
+# tooling scratch
+/.claude/worktrees/
+/.superpowers/
