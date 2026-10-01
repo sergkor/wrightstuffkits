@@ -422,13 +422,13 @@ shows variant selector for custom propeller → add to cart opens drawer with
 correct subtotal → reload keeps the cart → PayPal button container is present.
 PayPal popup is not automated.
 
-Manual sandbox checklist is in §12.
+Manual sandbox checklist is in §12; PayPal account configuration is in §13.
 
 ## 11. Phases
 
 1. **Scaffold and deploy**: `create-next-app`, Tailwind, shadcn init, static
-   export config, CI workflow, placeholder page live on `*.github.io`. Proves
-   the pipeline before features exist.
+   export config, CI workflow, placeholder page live on `*.github.io`,
+   `docs/PAYPAL_SETUP.md` (§13). Proves the pipeline before features exist.
 2. **Catalog**: schema, loader, 5 product files, images resized into
    `public/`, catalog tests.
 3. **Pages**: layout, header/footer, home, catalog with search/filter, product
@@ -460,7 +460,68 @@ Go-live:
 - [ ] Lighthouse: performance ≥ 90 mobile on home and a product page; no console errors.
 - [ ] `robots.txt` and `sitemap.xml` reachable; Product JSON-LD validates.
 
-## 13. Out of scope
+## 13. PayPal setup guide (`docs/PAYPAL_SETUP.md`)
+
+Phase 1 adds a standalone, owner-facing document at `docs/PAYPAL_SETUP.md`
+that walks through every PayPal-side setting the site depends on. It is
+written for a non-developer and is linked from the README. Contents:
+
+1. **Accounts**
+   - Create or upgrade to a PayPal **Business** account for Wright Stuff Kits.
+   - Sign in at developer.paypal.com with that account.
+2. **Sandbox for testing**
+   - Developer Dashboard → Testing Tools → Sandbox Accounts: note the
+     auto-created Business (seller) and Personal (buyer) accounts, reset
+     their passwords.
+   - Apps & Credentials → **Sandbox** tab → Create App ("Wright Stuff Kits
+     Sandbox", Merchant type). Copy the **Client ID** only; the Secret is never
+     used by this site.
+   - Put it in `.env.local` as `NEXT_PUBLIC_PAYPAL_CLIENT_ID=<sandbox id>`.
+   - How to log in to sandbox.paypal.com as the buyer, and where to see
+     orders as the seller.
+   - Negative testing: enable it on the sandbox app and the test card /
+     memo values that trigger `INSTRUMENT_DECLINED`.
+3. **Live credentials**
+   - Apps & Credentials → **Live** tab → Create App ("Wright Stuff Kits").
+     Copy the Client ID.
+   - GitHub → repo Settings → Secrets and variables → Actions → New secret
+     `PAYPAL_CLIENT_ID` = live Client ID. Re-run the deploy workflow.
+4. **App features**
+   - In the app settings keep only "Accept payments" enabled; no Vault, no
+     Log in with PayPal.
+5. **Merchant account settings** (paypal.com → Account Settings)
+   - Website payments → Website preferences: Auto return off (not used),
+     block payments from users who do not have a confirmed address: owner's
+     choice; PDT not needed.
+   - Shipping: do **not** configure shipping rules in PayPal; the site passes
+     shipping options in each order. PayPal profile shipping rules would
+     double-charge.
+   - Sales tax: if the owner must collect tax, set it here by state; the site
+     does not compute tax.
+   - Notifications: confirm seller "payment received" emails are on, since
+     these emails are the order record.
+   - Business information: display name, customer service email and phone
+     shown on buyer receipts.
+   - Currency: USD primary.
+6. **Address verification**
+   - Explain that the site rejects non-US addresses in the PayPal popup and
+     that no PayPal-side setting is required for this.
+7. **Verifying an order before shipping**
+   - Open the transaction in PayPal, compare item SKUs and unit prices in the
+     receipt against `src/content/products/*.ts`, check the shipping method
+     and address. Refund if anything was tampered with.
+8. **Refunds and disputes**
+   - Where to issue full or partial refunds; Seller Protection requirements
+     (ship to the address on the transaction, keep tracking).
+9. **Rotating or revoking a Client ID**
+   - Create a new app, update the GitHub secret, redeploy, then delete the old
+     app.
+
+The guide includes screenshots placeholders as numbered steps only (no
+images committed) and a short "Checklist before first live sale" that
+mirrors §12.
+
+## 14. Out of scope
 
 Accounts, order history, live inventory, discount codes, tax calculation,
 server-side price verification, non-US shipping, CMS, analytics (can be added
