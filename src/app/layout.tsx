@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartHydration } from '@/components/cart/CartHydration';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col bg-background text-foreground antialiased">
         <CartHydration />
         <Header />
+        <CartDrawer />
         <div className="flex-1">{children}</div>
         <Footer />
         <Toaster richColors position="top-center" />
