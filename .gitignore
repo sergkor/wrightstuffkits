@@ -41,3 +41,11 @@ next-env.d.ts
 # tooling scratch
 /.claude/worktrees/
 /.superpowers/
+
+# local env
+.env.local
+# next export output
+out/
+# playwright
+test-results/
+playwright-report/
