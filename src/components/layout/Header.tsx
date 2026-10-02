@@ -19,7 +19,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
         <MobileNav links={NAV_LINKS} />
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Image src="/images/brand/logo.svg" alt="" width={28} height={28} />
+          <Image src="/images/brand/logo.png" alt="" width={36} height={36} className="rounded-full" />
           <span>{site.name}</span>
         </Link>
         <nav className="ml-6 hidden gap-5 text-sm md:flex">

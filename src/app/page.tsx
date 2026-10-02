@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
 import { Button } from '@/components/ui/button';
@@ -19,16 +20,26 @@ export default function HomePage() {
   return (
     <main>
       <section className="border-b bg-muted/40">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-          <p className="text-sm font-medium uppercase tracking-wide text-primary">Science Olympiad Division C 2027</p>
-          <h1 className="mt-2 max-w-2xl text-4xl font-bold tracking-tight md:text-5xl">Rubber-powered flyer kits built to win.</h1>
-          <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            {site.tagline}. Laser-cut parts, Mylar or tissue covering, and instructions that cover building, winding, and trimming.
-          </p>
-          <div className="mt-8 flex gap-3">
-            <Button asChild size="lg"><Link href="/products/?cat=kits">Shop kits</Link></Button>
-            <Button asChild size="lg" variant="outline"><Link href="/products/?cat=propellers">Propellers</Link></Button>
+        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-4 py-16 md:flex-row md:justify-between md:py-24">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-wide text-primary">Science Olympiad Division C 2027</p>
+            <h1 className="mt-2 max-w-2xl text-4xl font-bold tracking-tight md:text-5xl">Rubber-powered flyer kits built to win.</h1>
+            <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+              {site.tagline}. Laser-cut parts, Mylar or tissue covering, and instructions that cover building, winding, and trimming.
+            </p>
+            <div className="mt-8 flex gap-3">
+              <Button asChild size="lg"><Link href="/products/?cat=kits">Shop kits</Link></Button>
+              <Button asChild size="lg" variant="outline"><Link href="/products/?cat=propellers">Propellers</Link></Button>
+            </div>
           </div>
+          <Image
+            src="/images/brand/logo.png"
+            alt={`${site.name} logo`}
+            width={512}
+            height={512}
+            priority
+            className="size-48 shrink-0 drop-shadow-md md:size-64 lg:size-72"
+          />
         </div>
       </section>
 

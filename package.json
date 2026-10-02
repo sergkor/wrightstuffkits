@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "test": "vitest",
     "e2e": "npm run build && playwright test",
-    "images": "node scripts/prepare-images.mjs"
+    "images": "node scripts/prepare-images.mjs",
+    "brand": "node scripts/prepare-brand.mjs"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^10.5.2",
