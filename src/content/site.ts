@@ -16,7 +16,7 @@ export const site = {
   contactEmail: 'orders@wrightstuffkits.com',
   usOnly: true,
   shippingOptions: [
-    { id: 'usps-ground', label: 'USPS Ground Advantage', amountCents: 650, selected: true },
+    { id: 'usps-ground', label: 'USPS Ground Advantage', amountCents: 800, selected: true },
     { id: 'usps-priority', label: 'USPS Priority Mail', amountCents: 1050, selected: false },
   ] as ShippingOption[],
   // Inlined at build time by Next.js; the build fails if unset.
