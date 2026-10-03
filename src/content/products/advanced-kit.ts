@@ -37,6 +37,6 @@ Step-by-step instructions cover assembly, motor making, winding tips, and trimmi
     'Step-by-step instructions (assembly, motor making, winding, trimming)',
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'ADV-KIT', label: 'Default', priceCents: 7999 }],
+  variants: [{ sku: 'ADV-KIT', label: 'Default', priceCents: 7599 }],
   tags: ['science olympiad', 'division c', 'mylar', 'carbon', 'advanced'],
 };
