@@ -10,7 +10,7 @@ export const advancedKit: ProductInput = {
 
 Built around laser-cut balsa and plywood parts, carbon fiber rods, and lightweight Mylar covering. Includes materials to build 2 balsa wood propellers, with adjustable propeller hubs to tune blade pitch.
 
-Step-by-step instructions cover assembly, motor making, winding tips, and trimming.`,
+Step-by-step instructions cover assembly, motor making, winding tips, and trimming...`,
   images: [
     { src: '/images/products/advanced-kit/render.png', alt: 'Advanced Kit rendering with elliptical wing and endplate stabilizer' },
     { src: '/images/products/advanced-kit/1.jpg', alt: 'Advanced Kit built plane, side view' },
