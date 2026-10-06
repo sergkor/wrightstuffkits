@@ -62,6 +62,7 @@ describe('catalog content', () => {
   it('package copy matches the change list', () => {
     const pkg = products.find((p) => p.slug === 'classic-elliptical-package')!;
     expect(pkg.category).toBe('kits');
+    expect(pkg.summary).toMatch(/one Elliptical and one Classic/);
     expect(pkg.description).toContain('materials to build an Elliptical and Classic kit plane');
     expect(pkg.description).toContain('ready-to-use 24 cm PVC propeller');
     expect(pkg.images[0].src).toBe('/images/products/classic-elliptical-package/render.png');
