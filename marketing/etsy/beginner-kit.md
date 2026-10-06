@@ -17,22 +17,14 @@ Science Olympiad Flight Kit – Beginner Rubber-Powered Indoor Plane, Division C
 
 **Description (paste as plain text; Etsy does not render formatting)**
 
-The right first airplane for Science Olympiad Flight. This Beginner Kit is designed to the Division C 2027 rules and built to survive the learning curve: laser-cut balsa and plywood parts, tough tissue covering, and a ready-to-fly Ikara 24 cm propeller so you spend your time learning to wind and trim, not carving a prop. Each kit builds TWO planes.
+The right first airplane for Science Olympiad Flight. This Beginner Kit is designed to the Division C 2027 rules and built to survive the learning curve: laser-cut balsa and plywood parts, tough tissue covering, and a ready-to-use 24 cm PVC propeller so you spend your time learning to wind and trim, not carving a prop. Each kit builds TWO planes.
 
 WHY START HERE
 • Robust airframe (about 9.5 g built) that shrugs off the first few landings
 • Laser-cut balsa and plywood parts fit together without templates or measuring
 • Tissue covering – forgiving to apply and easy to patch
-• Single Ikara 24 cm plastic propeller included, no prop building required
+• Ready-to-use 24 cm PVC propeller included, no prop building required
 • Clear step-by-step instructions written for first-time builders: assembly, making the rubber motor, winding, and trimming
-
-WHAT'S IN THE BOX
-• Laser-cut balsa and plywood parts (for 2 planes)
-• Tissue covering
-• Ikara 24 cm propeller
-• 1/8" FAI competition rubber
-• O-rings
-• Step-by-step instructions
 
 WHAT YOU WILL NEED (not included)
 • Super glue (CA)
@@ -42,15 +34,7 @@ WHAT YOU WILL NEED (not included)
 • A rubber winder
 
 WHO IT'S FOR
-Students and coaches new to the Flight event, first-year teams, classrooms, and anyone who wants a dependable indoor rubber-powered plane. Ready for more? Our Intermediate and Advanced Kits move to Mylar covering and buildable balsa props.
-
-SPECS
-• Rules: Science Olympiad Division C 2027 Flight (always confirm against the current rules manual and your event supervisor)
-• Planes per kit: 2
-• Covering: tissue
-• Structure: laser-cut balsa and plywood
-• Propeller: Ikara 24 cm (1 included)
-• Approx. built weight: 9.5 g
+Students and coaches new to the Flight event, first-year teams, classrooms, and anyone who wants a dependable indoor rubber-powered plane. Ready for more? Our Classic and Elliptical Kits move to Mylar covering and buildable balsa props.
 
 SHIPPING & RETURNS
 Ships from the US within 2 business days via USPS. US addresses only. Unopened kits can be returned within 30 days for a refund minus shipping. If anything arrives damaged, message me within 7 days with a photo and I'll replace it.
@@ -75,7 +59,7 @@ Coaches: message me for team quantities.
 13. classroom stem
 
 **Materials (≤13)**
-balsa wood, plywood, tissue paper, FAI rubber, steel wire, plastic propeller
+balsa wood, plywood, tissue paper, FAI rubber, steel wire, PVC propeller
 
 **Attributes**
 Primary color: natural · Recipient: teens, students · Age range: 13+ (small parts, hobby knife required)

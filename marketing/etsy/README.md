@@ -5,8 +5,9 @@ One file per product, matching the catalog in `src/content/products/`:
 | File | Product | Price |
 |---|---|---|
 | `beginner-kit.md` | Beginner Kit | $49.99 |
-| `intermediate-kit.md` | Intermediate Kit | $75.99 |
-| `advanced-kit.md` | Advanced Kit | $75.99 |
+| `classic-kit.md` | Classic Kit | $75.99 |
+| `elliptical-kit.md` | Elliptical Kit | $75.99 |
+| `classic-elliptical-package.md` | Classic + Elliptical Kit Package | $84.99 |
 | `propeller-kit.md` | Propeller Kit | $6.99 |
 | `custom-propeller.md` | Custom Laser-cut Propeller | $12.99–$28.99 (variations) |
 

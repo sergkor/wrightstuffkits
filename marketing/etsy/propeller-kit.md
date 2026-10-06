@@ -30,7 +30,7 @@ WHAT YOU WILL NEED (not included)
 • Water for wet-forming the blades (the prop-building steps are in our airplane kit instructions; message me if you need them on their own)
 
 GOOD TO KNOW
-• Same propeller design that ships in our Intermediate and Advanced Kits – buy this as spares, or to upgrade a plane that came with a plastic prop
+• Same propeller design that ships in our Classic and Elliptical Kits – buy this as spares, or to upgrade a plane that came with a plastic prop
 • Blades are shipped flat; you form them on the jig
 • Fits standard 1/32" (0.8 mm) prop shaft wire; message me if your plane uses a different shaft
 
