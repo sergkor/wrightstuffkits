@@ -43,6 +43,6 @@ npm run e2e           # playwright smoke against out/
 - [ ] Sandbox: after a successful payment, the confirmation page shows NO error toast.
 - [ ] Confirmation page shows the order ID and the custom-propeller email note; the cart badge is 0 after reload.
 - [ ] Live: one purchase of the Propeller Kit from a second PayPal account, then refund it.
-- [ ] Lighthouse mobile Performance ≥ 90 on `/` and `/products/advanced-kit/`; no console errors.
+- [ ] Lighthouse mobile Performance ≥ 90 on `/` and `/products/elliptical-kit/`; no console errors.
 - [ ] `https://wrightstuffkits.com/robots.txt` and `/sitemap.xml` load; a product URL validates at https://validator.schema.org.
-- [ ] If you change `shippingOptions` rates, update the expected `6.50`/`10.50` strings in `src/test/paypal-order.test.ts` in the same commit.
+- [ ] If you change `shippingOptions` rates, update the expected `8.00`/`10.50` strings in `src/test/paypal-order.test.ts` in the same commit.

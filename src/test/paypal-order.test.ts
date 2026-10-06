@@ -3,7 +3,7 @@ import { resolveLines } from '@/lib/cart/resolve';
 import { buildAmountPatch, buildOrder } from '@/lib/paypal/order';
 
 const lines = resolveLines([
-  { sku: 'ADV-KIT', qty: 1 },
+  { sku: 'ELL-KIT', qty: 1 },
   { sku: 'CPROP-4', qty: 2 },
 ]);
 
@@ -18,7 +18,7 @@ describe('buildOrder', () => {
 
   it('lists items with sku, quantity, unit price, and physical category', () => {
     expect(pu.items).toEqual([
-      { name: 'Advanced Kit', sku: 'ADV-KIT', quantity: '1', unit_amount: { currency_code: 'USD', value: '75.99' }, category: 'PHYSICAL_GOODS' },
+      { name: 'Elliptical Kit', sku: 'ELL-KIT', quantity: '1', unit_amount: { currency_code: 'USD', value: '75.99' }, category: 'PHYSICAL_GOODS' },
       { name: 'Custom Laser-cut Propeller – 4 sets', sku: 'CPROP-4', quantity: '2', unit_amount: { currency_code: 'USD', value: '20.99' }, category: 'PHYSICAL_GOODS' },
     ]);
   });
@@ -26,14 +26,14 @@ describe('buildOrder', () => {
   it('amount equals items plus shipping with a matching breakdown', () => {
     expect(pu.amount).toEqual({
       currency_code: 'USD',
-      value: '124.47',
-      breakdown: { item_total: { currency_code: 'USD', value: '117.97' }, shipping: { currency_code: 'USD', value: '6.50' } },
+      value: '125.97',
+      breakdown: { item_total: { currency_code: 'USD', value: '117.97' }, shipping: { currency_code: 'USD', value: '8.00' } },
     });
   });
 
   it('passes both shipping options with the chosen one selected', () => {
     expect(pu.shipping?.options?.map((o) => [o.id, o.selected, o.amount?.value])).toEqual([
-      ['usps-ground', true, '6.50'],
+      ['usps-ground', true, '8.00'],
       ['usps-priority', false, '10.50'],
     ]);
     const other = buildOrder(lines, 'usps-priority').purchase_units[0];
@@ -42,11 +42,11 @@ describe('buildOrder', () => {
   });
 
   it('falls back to the default option for an unknown shipping id', () => {
-    expect(buildOrder(lines, 'nope').purchase_units[0].amount.value).toBe('124.47');
+    expect(buildOrder(lines, 'nope').purchase_units[0].amount.value).toBe('125.97');
   });
 
   it('encodes skus in custom_id and asks PayPal to collect the address', () => {
-    expect(pu.custom_id).toBe('ADV-KITx1,CPROP-4x2');
+    expect(pu.custom_id).toBe('ELL-KITx1,CPROP-4x2');
     expect(order.application_context?.shipping_preference).toBe('GET_FROM_FILE');
     expect(order.application_context?.user_action).toBe('PAY_NOW');
   });

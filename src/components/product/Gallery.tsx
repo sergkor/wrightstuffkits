@@ -8,7 +8,7 @@ export function Gallery({ images }: { images: { src: string; alt: string }[] }) 
   const current = images[i];
   return (
     <div className="space-y-3">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-lg border bg-muted">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-lg border bg-white">
         <Image key={current.src} src={current.src} alt={current.alt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-contain" />
       </div>
       {images.length > 1 && (

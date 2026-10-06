@@ -2,8 +2,11 @@ import { expect, test } from '@playwright/test';
 
 test('home → catalog search → product → cart drawer → persists', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Rubber-Powered Plane Kits' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /which kit/i })).toHaveCount(0);
+  await expect(page.getByRole('banner').locator('img')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: /featured kits/i })).toBeVisible();
-  await expect(page.getByTestId('product-card')).toHaveCount(5);
+  await expect(page.getByTestId('product-card')).toHaveCount(6);
 
   await page.goto('/products/');
   await page.getByTestId('search').fill('mylar');
@@ -57,4 +60,12 @@ test('order confirmation renders from sessionStorage and shows custom-prop note'
 test('order confirmation without an order shows fallback', async ({ page }) => {
   await page.goto('/order/confirmed/');
   await expect(page.getByText(/no recent order found/i)).toBeVisible();
+});
+
+test('about page carries the rewritten description', async ({ page }) => {
+  await page.goto('/about/');
+  await expect(page.getByText(/designs and sells laser-cut rubber-powered indoor free-flight kits/i)).toBeVisible();
+  await expect(page.getByText(/placed 1st at the MIT Science Olympiad Invitational in the 2025 and 2026 seasons/i)).toBeVisible();
+  await expect(page.getByRole('link', { name: 'soinc.org' })).toHaveAttribute('href', 'https://www.soinc.org/');
+  await expect(page.getByText(/2nd place/i)).toHaveCount(0);
 });

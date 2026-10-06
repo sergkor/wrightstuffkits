@@ -15,10 +15,11 @@ const base: ProductInput = {
 describe('buildCatalog', () => {
   it('applies defaults', () => {
     const [p] = buildCatalog([base]);
-    expect(p.specs).toEqual({});
-    expect(p.included).toEqual([]);
+    expect(p.notIncluded).toEqual([]);
     expect(p.featured).toBe(false);
     expect(p.variants[0].inStock).toBe(true);
+    expect(p).not.toHaveProperty('specs');
+    expect(p).not.toHaveProperty('included');
   });
 
   it('rejects duplicate slugs', () => {
