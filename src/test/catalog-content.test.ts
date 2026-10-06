@@ -6,9 +6,10 @@ import { products, getVariant } from '@/lib/catalog';
 const PUBLIC = path.resolve(__dirname, '../../public');
 
 describe('catalog content', () => {
-  it('has the five launch products', () => {
+  it('has the six products', () => {
     expect(products.map((p) => p.slug).sort()).toEqual([
       'beginner-kit',
+      'classic-elliptical-package',
       'classic-kit',
       'custom-propeller',
       'elliptical-kit',
@@ -32,6 +33,7 @@ describe('catalog content', () => {
     expect(getVariant('PROP-KIT')?.variant.priceCents).toBe(699);
     expect(getVariant('CPROP-2')?.variant.priceCents).toBe(1299);
     expect(getVariant('CPROP-6')?.variant.priceCents).toBe(2899);
+    expect(getVariant('PKG-CLS-ELL')?.variant.priceCents).toBe(8499);
   });
 
   it('custom propeller has 5 set-count variants stepping by $4', () => {
@@ -48,12 +50,22 @@ describe('catalog content', () => {
     }
   });
 
-  it('three kits are featured', () => {
-    expect(products.filter((p) => p.featured).map((p) => p.slug).sort()).toEqual([
+  it('four kits are featured, package last', () => {
+    expect(products.filter((p) => p.featured).map((p) => p.slug)).toEqual([
       'beginner-kit',
       'classic-kit',
       'elliptical-kit',
+      'classic-elliptical-package',
     ]);
+  });
+
+  it('package copy matches the change list', () => {
+    const pkg = products.find((p) => p.slug === 'classic-elliptical-package')!;
+    expect(pkg.category).toBe('kits');
+    expect(pkg.description).toContain('materials to build an Elliptical and Classic kit plane');
+    expect(pkg.description).toContain('ready-to-use 24 cm PVC propeller');
+    expect(pkg.images[0].src).toBe('/images/products/classic-elliptical-package/render.png');
+    expect([pkg.name, pkg.summary, ...pkg.tags].join(' ')).not.toMatch(/mylar/i); // keeps the e2e "mylar" search at 2 results
   });
 
   it('kit copy matches the October 2026 change list', () => {

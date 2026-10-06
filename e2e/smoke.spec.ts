@@ -6,7 +6,7 @@ test('home → catalog search → product → cart drawer → persists', async (
   await expect(page.getByRole('heading', { name: /which kit/i })).toHaveCount(0);
   await expect(page.getByRole('banner').locator('img')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: /featured kits/i })).toBeVisible();
-  await expect(page.getByTestId('product-card')).toHaveCount(5);
+  await expect(page.getByTestId('product-card')).toHaveCount(6);
 
   await page.goto('/products/');
   await page.getByTestId('search').fill('mylar');
