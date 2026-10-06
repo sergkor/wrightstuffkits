@@ -22,8 +22,6 @@ export const ProductSchema = z.object({
   summary: z.string().min(1).max(200),
   description: z.string().min(1),
   images: z.array(z.object({ src: z.string().startsWith('/'), alt: z.string().min(1) })).min(1),
-  specs: z.record(z.string(), z.string()).default({}),
-  included: z.array(z.string()).default([]),
   notIncluded: z.array(z.string()).default([]),
   downloads: z.array(z.object({ label: z.string().min(1), href: z.string().startsWith('/') })).default([]),
   variants: z.array(VariantSchema).min(1),

@@ -3,9 +3,8 @@ import { notFound } from 'next/navigation';
 import { Description } from '@/components/product/Description';
 import { Downloads } from '@/components/product/Downloads';
 import { Gallery } from '@/components/product/Gallery';
-import { IncludedList } from '@/components/product/IncludedList';
+import { NeededList } from '@/components/product/NeededList';
 import { PurchasePanel } from '@/components/product/PurchasePanel';
-import { SpecTable } from '@/components/product/SpecTable';
 import { site } from '@/content/site';
 import { getProduct, minPriceCents, products } from '@/lib/catalog';
 
@@ -63,8 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
       <div className="mt-12 space-y-10">
-        <SpecTable specs={product.specs} />
-        <IncludedList included={product.included} notIncluded={product.notIncluded} />
+        <NeededList items={product.notIncluded} />
         <Downloads downloads={product.downloads} />
       </div>
     </main>

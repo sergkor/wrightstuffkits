@@ -11,8 +11,6 @@ Comes with adjustable propeller hubs, a 4 x 2 inch cardboard tube for wet-formin
 
 After ordering, email your design in any format (DXF preferred; an image works if you also give a size).`,
   images: [{ src: '/images/products/custom-propeller/1.jpg', alt: 'Laser-cut balsa propeller example' }],
-  specs: { Material: '1/32" balsa', Hub: 'Adjustable pitch', 'Forming tube': '4 x 2 inch cardboard' },
-  included: ['Laser-cut blades for each set', 'Adjustable propeller hubs', 'Cardboard forming tube'],
   notIncluded: ['Super glue (CA)'],
   optionLabel: 'Number of sets',
   variants: [
