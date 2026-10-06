@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { site } from '@/content/site';
 import { CartTrigger } from './CartTrigger';
@@ -18,9 +17,8 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
         <MobileNav links={NAV_LINKS} />
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Image src="/images/brand/logo.png" alt="" width={36} height={36} className="rounded-full" />
-          <span>{site.name}</span>
+        <Link href="/" className="font-semibold">
+          {site.name}
         </Link>
         <nav className="ml-6 hidden gap-5 text-sm md:flex">
           {NAV_LINKS.map((l) => (

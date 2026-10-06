@@ -1,10 +1,9 @@
-// Builds the site logo and favicons from marketing/logo.jpeg.
+// Builds the site favicons from marketing/logo.jpeg.
 // Run: npm run brand
 import sharp from 'sharp';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 
 const SRC = 'marketing/logo.jpeg';
-const BRAND_DIR = 'public/images/brand';
 
 // Crop the circular badge out of the light background and make the outside transparent.
 async function circularBadge(size) {
@@ -47,10 +46,7 @@ function ico(pngs) {
   return Buffer.concat([header, ...dir, ...pngs.map((p) => p.data)]);
 }
 
-await mkdir(BRAND_DIR, { recursive: true });
-
 const outputs = [
-  [`${BRAND_DIR}/logo.png`, 512],
   ['src/app/icon.png', 512],
   ['src/app/apple-icon.png', 180],
 ];

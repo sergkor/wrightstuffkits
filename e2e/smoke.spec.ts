@@ -2,6 +2,9 @@ import { expect, test } from '@playwright/test';
 
 test('home → catalog search → product → cart drawer → persists', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Rubber-Powered Plane Kits' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /which kit/i })).toHaveCount(0);
+  await expect(page.getByRole('banner').locator('img')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: /featured kits/i })).toBeVisible();
   await expect(page.getByTestId('product-card')).toHaveCount(5);
 
