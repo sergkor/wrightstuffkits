@@ -10,7 +10,7 @@ describe('pricing', () => {
 
   it('sums line totals', () => {
     const lines = resolveLines([
-      { sku: 'ADV-KIT', qty: 1 },
+      { sku: 'ELL-KIT', qty: 1 },
       { sku: 'PROP-KIT', qty: 2 },
     ]);
     expect(subtotalCents(lines)).toBe(7599 + 1398);

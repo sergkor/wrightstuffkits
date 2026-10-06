@@ -20,9 +20,9 @@ describe('cart store', () => {
 
   it('adds and merges quantities', () => {
     const store = createCartStore(storage);
-    store.getState().add('ADV-KIT');
-    store.getState().add('ADV-KIT', 2);
-    expect(store.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 3 }]);
+    store.getState().add('ELL-KIT');
+    store.getState().add('ELL-KIT', 2);
+    expect(store.getState().items).toEqual([{ sku: 'ELL-KIT', qty: 3 }]);
   });
 
   it('setQty updates and removes at zero', () => {
@@ -55,9 +55,9 @@ describe('cart store', () => {
 
   it('persists only items and rehydrates on demand', async () => {
     const a = createCartStore(storage);
-    a.getState().add('ADV-KIT', 2);
+    a.getState().add('ELL-KIT', 2);
     a.getState().open();
-    expect(storage.data.get('wsk-cart-v1')).toContain('ADV-KIT');
+    expect(storage.data.get('wsk-cart-v1')).toContain('ELL-KIT');
     expect(storage.data.get('wsk-cart-v1')).not.toContain('isOpen');
 
     const b = createCartStore(storage);
@@ -65,17 +65,17 @@ describe('cart store', () => {
     expect(b.getState().items).toEqual([]);
     await b.persist.rehydrate();
     expect(b.getState().hasHydrated).toBe(true);
-    expect(b.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 2 }]);
+    expect(b.getState().items).toEqual([{ sku: 'ELL-KIT', qty: 2 }]);
   });
 
   it('prunes unknown SKUs on rehydrate', async () => {
     storage.setItem(
       'wsk-cart-v1',
-      JSON.stringify({ state: { items: [{ sku: 'ADV-KIT', qty: 1 }, { sku: 'GONE', qty: 9 }] }, version: 0 }),
+      JSON.stringify({ state: { items: [{ sku: 'ELL-KIT', qty: 1 }, { sku: 'GONE', qty: 9 }] }, version: 0 }),
     );
     const store = createCartStore(storage);
     await store.persist.rehydrate();
-    expect(store.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 1 }]);
+    expect(store.getState().items).toEqual([{ sku: 'ELL-KIT', qty: 1 }]);
   });
 
   it('still hydrates with an empty cart when storage getItem throws', async () => {
@@ -101,7 +101,7 @@ describe('cart store', () => {
       removeItem: () => {},
     };
     const store = createCartStore(full);
-    expect(() => store.getState().add('ADV-KIT')).not.toThrow();
-    expect(store.getState().items).toEqual([{ sku: 'ADV-KIT', qty: 1 }]);
+    expect(() => store.getState().add('ELL-KIT')).not.toThrow();
+    expect(store.getState().items).toEqual([{ sku: 'ELL-KIT', qty: 1 }]);
   });
 });

@@ -1,8 +1,8 @@
 import type { ProductInput } from '@/lib/catalog/schema';
-import { advancedKit } from './advanced-kit';
 import { beginnerKit } from './beginner-kit';
+import { classicKit } from './classic-kit';
 import { customPropeller } from './custom-propeller';
-import { intermediateKit } from './intermediate-kit';
+import { ellipticalKit } from './elliptical-kit';
 import { propellerKit } from './propeller-kit';
 
-export const rawProducts: ProductInput[] = [beginnerKit, intermediateKit, advancedKit, propellerKit, customPropeller];
+export const rawProducts: ProductInput[] = [beginnerKit, classicKit, ellipticalKit, propellerKit, customPropeller];

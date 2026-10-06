@@ -1,8 +1,8 @@
 import type { ProductInput } from '@/lib/catalog/schema';
 
-export const intermediateKit: ProductInput = {
-  slug: 'intermediate-kit',
-  name: 'Intermediate Kit',
+export const classicKit: ProductInput = {
+  slug: 'classic-kit',
+  name: 'Classic Kit',
   category: 'kits',
   featured: true,
   summary: 'Highly competitive Division C 2027 flyer. Builds 2 planes. Mylar and carbon construction.',
@@ -12,12 +12,12 @@ Built around laser-cut balsa, carbon fiber rods, and lightweight Mylar covering.
 
 Step-by-step instructions cover assembly, motor making, winding tips, and trimming.`,
   images: [
-    { src: '/images/products/intermediate-kit/render.png', alt: 'Intermediate Kit rendering with rectangular Mylar wings' },
-    { src: '/images/products/intermediate-kit/1.jpg', alt: 'Intermediate Kit built plane, top view' },
-    { src: '/images/products/intermediate-kit/2.jpg', alt: 'Intermediate Kit built plane, angled view' },
-    { src: '/images/products/intermediate-kit/3.jpg', alt: 'Intermediate Kit with balsa propeller and fin' },
+    { src: '/images/products/classic-kit/render.png', alt: 'Classic Kit rendering with rectangular Mylar wings' },
+    { src: '/images/products/classic-kit/1.jpg', alt: 'Classic Kit built plane, top view' },
+    { src: '/images/products/classic-kit/2.jpg', alt: 'Classic Kit built plane, angled view' },
+    { src: '/images/products/classic-kit/3.jpg', alt: 'Classic Kit with balsa propeller and fin' },
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'INT-KIT', label: 'Default', priceCents: 7599 }],
-  tags: ['science olympiad', 'division c', 'mylar', 'carbon', 'intermediate'],
+  variants: [{ sku: 'CLS-KIT', label: 'Default', priceCents: 7599 }],
+  tags: ['science olympiad', 'division c', 'mylar', 'carbon', 'classic'],
 };

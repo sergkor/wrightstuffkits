@@ -3,7 +3,7 @@ import { resolveLines } from '@/lib/cart/resolve';
 import { buildAmountPatch, buildOrder } from '@/lib/paypal/order';
 
 const lines = resolveLines([
-  { sku: 'ADV-KIT', qty: 1 },
+  { sku: 'ELL-KIT', qty: 1 },
   { sku: 'CPROP-4', qty: 2 },
 ]);
 
@@ -18,7 +18,7 @@ describe('buildOrder', () => {
 
   it('lists items with sku, quantity, unit price, and physical category', () => {
     expect(pu.items).toEqual([
-      { name: 'Advanced Kit', sku: 'ADV-KIT', quantity: '1', unit_amount: { currency_code: 'USD', value: '75.99' }, category: 'PHYSICAL_GOODS' },
+      { name: 'Elliptical Kit', sku: 'ELL-KIT', quantity: '1', unit_amount: { currency_code: 'USD', value: '75.99' }, category: 'PHYSICAL_GOODS' },
       { name: 'Custom Laser-cut Propeller – 4 sets', sku: 'CPROP-4', quantity: '2', unit_amount: { currency_code: 'USD', value: '20.99' }, category: 'PHYSICAL_GOODS' },
     ]);
   });
@@ -46,7 +46,7 @@ describe('buildOrder', () => {
   });
 
   it('encodes skus in custom_id and asks PayPal to collect the address', () => {
-    expect(pu.custom_id).toBe('ADV-KITx1,CPROP-4x2');
+    expect(pu.custom_id).toBe('ELL-KITx1,CPROP-4x2');
     expect(order.application_context?.shipping_preference).toBe('GET_FROM_FILE');
     expect(order.application_context?.user_action).toBe('PAY_NOW');
   });
