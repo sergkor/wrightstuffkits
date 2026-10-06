@@ -44,10 +44,10 @@ export function PayPalCheckout() {
         <PayPalButtons
           style={{ layout: 'vertical', shape: 'rect' }}
           forceReRender={[cartKey]}
-          createOrder={(_data, actions) => {
+          createOrder={(data, actions) => {
             setError(null);
             shippingRef.current = defaultShippingOption().id;
-            return actions.order.create(buildOrder(lines, shippingRef.current));
+            return actions.order.create(buildOrder(lines, shippingRef.current, data.paymentSource));
           }}
           // Legacy callback: the only client-side way to re-price shipping without a server.
           // PayPal marks it deprecated, but the v5 SDK that PayPalScriptProvider loads still serves it.

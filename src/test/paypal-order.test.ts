@@ -49,6 +49,23 @@ describe('buildOrder', () => {
     expect(pu.custom_id).toBe('ELL-KITx1,CPROP-4x2');
     expect(order.application_context?.shipping_preference).toBe('GET_FROM_FILE');
     expect(order.application_context?.user_action).toBe('PAY_NOW');
+    expect(order.payment_source).toBeUndefined();
+  });
+
+  it('opens the PayPal login page instead of account sign-up for the PayPal button', () => {
+    const paypal = buildOrder(lines, 'usps-ground', 'paypal');
+    expect(paypal.payment_source).toEqual({
+      paypal: {
+        experience_context: { landing_page: 'LOGIN', shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' },
+      },
+    });
+    expect(paypal.application_context).toBeUndefined();
+  });
+
+  it('keeps guest checkout for the card button', () => {
+    const card = buildOrder(lines, 'usps-ground', 'card');
+    expect(card.payment_source).toBeUndefined();
+    expect(card.application_context?.shipping_preference).toBe('GET_FROM_FILE');
   });
 });
 

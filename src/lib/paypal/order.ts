@@ -22,8 +22,16 @@ function amountFor(lines: CartLine[], shippingId: string) {
   };
 }
 
-export function buildOrder(lines: CartLine[], shippingId: string): CreateOrderRequestBody {
+// fundingSource is the button the buyer clicked (createOrder's data.paymentSource).
+export function buildOrder(lines: CartLine[], shippingId: string, fundingSource?: string): CreateOrderRequestBody {
   const chosen = resolveShippingId(shippingId);
+  const experience = { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' } as const;
+  // For the PayPal button, open the login page: the default (NO_PREFERENCE) shows account sign-up
+  // to unrecognized browsers. Other buttons (card) keep PayPal's guest flow.
+  const context =
+    fundingSource === 'paypal'
+      ? { payment_source: { paypal: { experience_context: { landing_page: 'LOGIN' as const, ...experience } } } }
+      : { application_context: experience };
   return {
     intent: 'CAPTURE',
     purchase_units: [
@@ -48,7 +56,7 @@ export function buildOrder(lines: CartLine[], shippingId: string): CreateOrderRe
         },
       },
     ],
-    application_context: { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' },
+    ...context,
   };
 }
 
