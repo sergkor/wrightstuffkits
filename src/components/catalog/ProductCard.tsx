@@ -13,8 +13,8 @@ export function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden rounded-lg border bg-card transition hover:shadow-md"
       data-testid="product-card"
     >
-      <div className="relative aspect-[4/3] bg-muted">
-        <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+      <div className="relative aspect-[4/3] bg-white">
+        <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain" />
         {soldOut && <Badge variant="secondary" className="absolute left-2 top-2">Sold out</Badge>}
       </div>
       <div className="flex flex-1 flex-col gap-1 p-4">
