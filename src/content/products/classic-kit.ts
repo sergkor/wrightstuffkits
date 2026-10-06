@@ -8,7 +8,7 @@ export const classicKit: ProductInput = {
   summary: 'Highly competitive Division C 2027 flyer. Builds 2 planes. Mylar and carbon construction.',
   description: `This kit complies with Division C 2027 Science Olympiad rules and is designed to be highly competitive. Each kit has enough to build 2 planes.
 
-Built around laser-cut balsa, carbon fiber rods, and lightweight Mylar covering. Includes materials to build 2 balsa wood propellers, with adjustable propeller hubs that let you tune blade pitch.
+Built around laser-cut balsa, carbon fiber rods, and lightweight Mylar covering. Includes materials to build 2 balsa wood propellers, with adjustable propeller hubs that let you tune blade pitch, plus one ready-to-use 24 cm PVC propeller.
 
 Step-by-step instructions cover assembly, motor making, winding tips, and trimming.`,
   images: [

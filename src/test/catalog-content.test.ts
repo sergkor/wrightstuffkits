@@ -55,4 +55,20 @@ describe('catalog content', () => {
       'elliptical-kit',
     ]);
   });
+
+  it('kit copy matches the October 2026 change list', () => {
+    const by = (slug: string) => products.find((p) => p.slug === slug)!;
+    const elliptical = by('elliptical-kit');
+    const classic = by('classic-kit');
+    const beginner = by('beginner-kit');
+
+    expect(`${elliptical.summary} ${elliptical.description}`).not.toMatch(/3\+/);
+    for (const kit of [elliptical, classic]) {
+      expect(kit.description).toContain('materials to build 2 balsa wood propellers');
+      expect(kit.description).toContain('ready-to-use 24 cm PVC propeller');
+    }
+    expect(beginner.description).toContain('ready-to-use 24 cm PVC propeller');
+    const beginnerText = [beginner.summary, beginner.description, ...beginner.tags, ...beginner.images.map((i) => i.alt)].join(' ');
+    expect(beginnerText).not.toMatch(/ikara/i);
+  });
 });

@@ -5,10 +5,10 @@ export const ellipticalKit: ProductInput = {
   name: 'Elliptical Kit',
   category: 'kits',
   featured: true,
-  summary: 'Max-duration Division C 2027 flyer. Builds 2 planes. Designed for 3+ minute flights.',
-  description: `This kit complies with Division C 2027 Science Olympiad rules and is designed for maximum possible flight time (designed for 3+ minutes). Each kit has enough to build 2 planes.
+  summary: 'Max-duration Division C 2027 flyer with an elliptical wing. Builds 2 planes.',
+  description: `This kit complies with Division C 2027 Science Olympiad rules and is designed for maximum possible flight time. Each kit has enough to build 2 planes.
 
-Built around laser-cut balsa and plywood parts, carbon fiber rods, and lightweight Mylar covering. Includes materials to build 2 balsa wood propellers, with adjustable propeller hubs to tune blade pitch.
+Built around laser-cut balsa and plywood parts, carbon fiber rods, and lightweight Mylar covering. Includes materials to build 2 balsa wood propellers, with adjustable propeller hubs to tune blade pitch, plus one ready-to-use 24 cm PVC propeller.
 
 Step-by-step instructions cover assembly, motor making, winding tips, and trimming.`,
   images: [
