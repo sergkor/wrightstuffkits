@@ -12,7 +12,7 @@ export default function HomePage() {
     <main>
       <section className="border-b bg-muted/40">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-          <p className="text-sm font-medium uppercase tracking-wide text-primary">Science Olympiad Division C 2027</p>
+          <p className="text-sm font-medium uppercase tracking-wide text-primary">Kits for Science Olympiad Division C 2027</p>
           <h1 className="mt-2 max-w-2xl text-4xl font-bold tracking-tight md:text-5xl">Rubber-Powered Plane Kits</h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">
             {site.tagline}. Laser-cut parts, carbon fiber rods, covering, and other building supplies with step-by-step instructions that cover building and flight testing.
