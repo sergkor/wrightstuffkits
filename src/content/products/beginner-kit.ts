@@ -8,7 +8,7 @@ export const beginnerKit: ProductInput = {
   summary: 'Robust tissue-covered Division C 2027 flyer for first-time builders. Builds 2 planes.',
   description: `This kit complies with Division C 2027 Science Olympiad rules and is great for beginners and people who are new to the event. Each kit has enough to build 2 planes.
 
-While slightly heavier (about 9.5 g), it is built to be robust with laser-cut balsa, plywood parts, and tissue covering. Comes with a ready-to-use 24 cm PVC propeller.
+While slightly heavier (about 9.5 g), it is built to be robust with laser-cut balsa, plywood parts, and tissue covering. Includes one ready-to-use 24 cm PVC propeller, which you can move between the two planes.
 
 Step-by-step instructions cover assembly, motor making, winding tips, and trimming.`,
   images: [
