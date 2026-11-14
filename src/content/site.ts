@@ -11,7 +11,7 @@ export const site = {
   name: 'Wright Stuff Kits',
   domain: 'wrightstuffkits.com',
   url: 'https://wrightstuffkits.com',
-  tagline: 'Science Olympiad free-flight kits and propeller supplies',
+  tagline: 'Free-flight kits and propeller supplies',
   // Placeholder. Replace before launch (see docs/PAYPAL_SETUP.md checklist).
   contactEmail: 'orders@wrightstuffkits.com',
   usOnly: true,
