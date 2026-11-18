@@ -80,7 +80,10 @@ export function PurchasePanel({ product }: { product: Product }) {
           Buy now with PayPal
         </Button>
       </div>
-      <p className="text-xs text-muted-foreground">Shipping options and any tax are chosen in PayPal. US addresses only.</p>
+      <p className="text-xs text-muted-foreground">
+        Pay with PayPal to choose your shipping speed; card checkout ships USPS Ground Advantage. Any tax is applied by
+        PayPal. US addresses only.
+      </p>
     </div>
   );
 }

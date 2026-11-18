@@ -35,9 +35,15 @@ In both apps keep only **Accept payments** enabled. Leave Vault, Log in with Pay
 - **Currency**: USD primary.
 - **Website payments → Website preferences**: Auto Return off, PDT off (not used).
 
-## 6. Address rules
+## 6. Address and shipping rules
 
 The site rejects non-US addresses inside the PayPal popup. No PayPal setting is required.
+
+Shipping speed is a choice only on the PayPal and Venmo buttons. PayPal does not support shipping options or the
+shipping callback on the unbranded **Debit or Credit Card** flow — it never fires the callback for a guest buyer, so an
+order that still carries shipping options is refused at approval with "Your order can't be shipped to this address."
+The site therefore sends no shipping options on that flow and charges the default option (USPS Ground Advantage) flat.
+If you change which option is the default in `src/content/site.ts`, that is what every card buyer pays.
 
 ## 7. Verify every order before shipping
 

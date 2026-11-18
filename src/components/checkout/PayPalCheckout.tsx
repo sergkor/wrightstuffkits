@@ -13,6 +13,7 @@ import { LAST_ORDER_KEY, summarizeOrder } from '@/lib/paypal/summary';
 const SDK_OPTIONS = { clientId: site.paypalClientId, currency: 'USD', intent: 'capture', components: 'buttons' };
 const DECLINED_MSG = 'That payment method was declined. Please choose another.';
 const FAILED_MSG = 'PayPal could not complete the payment. Your cart is unchanged.';
+const SHIPPING_MSG = 'We could not update shipping for that address. Please try again, or email us and we will take the order by hand.';
 
 export function PayPalCheckout() {
   const lines = useCartLines();
@@ -51,13 +52,22 @@ export function PayPalCheckout() {
           }}
           // Legacy callback: the only client-side way to re-price shipping without a server.
           // PayPal marks it deprecated, but the v5 SDK that PayPalScriptProvider loads still serves it.
+          // Only fires for the PayPal and Venmo sources; see the note in lib/paypal/order.ts.
           onShippingChange={async (data, actions) => {
             if (site.usOnly && data.shipping_address && data.shipping_address.country_code !== 'US') {
               return actions.reject();
             }
             const selected = data.selected_shipping_option?.id;
             if (selected) shippingRef.current = selected;
-            return actions.order.patch(buildAmountPatch(lines, shippingRef.current));
+            try {
+              return await actions.order.patch(buildAmountPatch(lines, shippingRef.current));
+            } catch {
+              // Rejecting is the only way to stop an order whose total no longer matches the chosen
+              // shipping, but PayPal words every rejection as an address problem. Show the real
+              // reason in our own UI so the buyer is not left hunting for a bad address.
+              setError(SHIPPING_MSG);
+              return actions.reject();
+            }
           }}
           onApprove={async (_data, actions) => {
             const fail = () => {

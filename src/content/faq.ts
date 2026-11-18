@@ -4,7 +4,7 @@ export interface FaqItem {
 }
 
 export const faq: FaqItem[] = [
-  { q: 'Where do you ship?', a: 'United States only. You choose USPS Ground Advantage or Priority Mail inside PayPal at checkout.' },
+  { q: 'Where do you ship?', a: 'United States only. Pay with PayPal and you choose USPS Ground Advantage or Priority Mail inside PayPal at checkout. Debit or credit card checkout ships USPS Ground Advantage.' },
   { q: 'How long until my order ships?', a: 'Kits usually ship within 2 business days. Custom laser-cut propellers ship within 5 business days of receiving your design file.' },
   { q: 'Do the kits meet Science Olympiad rules?', a: 'All of our kits are designed to comply with Division C 2027 Flight rules. Always check the current rules manual and your event supervisor for the final word.' },
   { q: 'What tools do I need?', a: 'Super glue (CA), a hobby knife, spray adhesive, pliers, and a winder. These are not included in any kit.' },

@@ -31,14 +31,38 @@ describe('buildOrder', () => {
     });
   });
 
-  it('passes both shipping options with the chosen one selected', () => {
-    expect(pu.shipping?.options?.map((o) => [o.id, o.selected, o.amount?.value])).toEqual([
+  it('passes both shipping options with the chosen one selected for the PayPal button', () => {
+    const paypal = buildOrder(lines, 'usps-ground', 'paypal').purchase_units[0];
+    expect(paypal.shipping?.options?.map((o) => [o.id, o.selected, o.amount?.value])).toEqual([
       ['usps-ground', true, '8.00'],
       ['usps-priority', false, '10.50'],
     ]);
-    const other = buildOrder(lines, 'usps-priority').purchase_units[0];
+    const other = buildOrder(lines, 'usps-priority', 'paypal').purchase_units[0];
     expect(other.amount.value).toBe('128.47');
     expect(other.shipping?.options?.find((o) => o.id === 'usps-priority')?.selected).toBe(true);
+  });
+
+  it('passes shipping options for the Venmo button', () => {
+    const venmo = buildOrder(lines, 'usps-ground', 'venmo').purchase_units[0];
+    expect(venmo.shipping?.options?.map((o) => o.id)).toEqual(['usps-ground', 'usps-priority']);
+  });
+
+  // PayPal never fires onShippingChange for a guest card buyer, so options left on the order stay
+  // unresolved and the order is rejected at approval with "Your order can't be shipped to this
+  // address." Omitting them is what keeps card checkout working.
+  it('omits shipping options for the card button and prices the default option into the total', () => {
+    const card = buildOrder(lines, 'usps-ground', 'card').purchase_units[0];
+    expect(card.shipping).toBeUndefined();
+    expect(card.amount).toEqual({
+      currency_code: 'USD',
+      value: '125.97',
+      breakdown: { item_total: { currency_code: 'USD', value: '117.97' }, shipping: { currency_code: 'USD', value: '8.00' } },
+    });
+  });
+
+  it('omits shipping options for an unknown or missing funding source', () => {
+    expect(pu.shipping).toBeUndefined();
+    expect(buildOrder(lines, 'usps-ground', 'sofort').purchase_units[0].shipping).toBeUndefined();
   });
 
   it('falls back to the default option for an unknown shipping id', () => {
