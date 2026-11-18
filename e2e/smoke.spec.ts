@@ -33,6 +33,22 @@ test('home → catalog search → product → cart drawer → persists', async (
   await expect(page.getByTestId('paypal-buttons')).toBeVisible();
 });
 
+// The checkout page renders its own PayPal buttons. A cart drawer on top of it mounted a second
+// set and their hosted overlays stacked, so the drawer is suppressed there.
+test('checkout page suppresses the cart drawer, so PayPal buttons mount once', async ({ page }) => {
+  await page.goto('/products/custom-propeller/');
+  await page.getByTestId('add-to-cart').click();
+  await expect(page.getByRole('dialog', { name: /your cart/i })).toBeVisible();
+
+  await page.goto('/checkout/');
+  await expect(page.getByTestId('paypal-buttons')).toHaveCount(1);
+  await expect(page.getByRole('dialog', { name: /your cart/i })).toHaveCount(0);
+
+  await page.getByTestId('cart-trigger').click();
+  await expect(page.getByRole('dialog', { name: /your cart/i })).toHaveCount(0);
+  await expect(page.getByTestId('paypal-buttons')).toHaveCount(1);
+});
+
 test('order confirmation renders from sessionStorage and shows custom-prop note', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => {
