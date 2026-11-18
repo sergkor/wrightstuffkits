@@ -31,6 +31,8 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+          # Public measurement ID, so a repo variable rather than a secret. Unset = no GA tag.
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

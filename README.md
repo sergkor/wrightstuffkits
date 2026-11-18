@@ -22,11 +22,13 @@ npm run e2e           # playwright smoke against out/
 
 - Design: `docs/superpowers/specs/2026-10-01-wrightstuffkits-store-design.md`
 - PayPal account setup: `docs/PAYPAL_SETUP.md`
+- Google Analytics 4 setup: `docs/ANALYTICS_SETUP.md`
 
 ## Launch runbook
 
 1. Set `contactEmail` and `shippingOptions` in `src/content/site.ts`.
 2. Add the live PayPal Client ID as the `PAYPAL_CLIENT_ID` repository secret (see `docs/PAYPAL_SETUP.md`).
+   Optionally add the GA4 Measurement ID as the `GA_MEASUREMENT_ID` repository *variable* (see `docs/ANALYTICS_SETUP.md`); unset means no analytics tag.
 3. DNS at the registrar: `A` records for `wrightstuffkits.com` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `CNAME www` → `<github-user>.github.io` (on Cloudflare set them to DNS-only). Then in Settings → Pages set the custom domain and enable **Enforce HTTPS** once the DNS check passes.
 4. In GitHub → Settings → Pages set **Source: GitHub Actions** (the deploy job fails on the first push otherwise).
 5. Push to `main`; the workflow builds, tests, and deploys.

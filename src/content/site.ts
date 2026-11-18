@@ -1,4 +1,4 @@
-import { requireEnv } from '@/lib/env';
+import { optionalEnv, requireEnv } from '@/lib/env';
 
 export interface ShippingOption {
   id: string;
@@ -21,6 +21,9 @@ export const site = {
   ] as ShippingOption[],
   // Inlined at build time by Next.js; the build fails if unset.
   paypalClientId: requireEnv('NEXT_PUBLIC_PAYPAL_CLIENT_ID', process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID),
+  // GA4 measurement ID (public, appears in page source). Optional on purpose: unset means no tag,
+  // which keeps local dev and PR builds out of the production property.
+  gaMeasurementId: optionalEnv(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID),
 };
 
 export function defaultShippingOption(): ShippingOption {

@@ -3,6 +3,9 @@ import { CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { purchaseEvent } from '@/lib/analytics/events';
+import { claimPurchase } from '@/lib/analytics/purchase-sent';
+import { track } from '@/lib/analytics/track';
 import { formatCents } from '@/lib/format';
 import { LAST_ORDER_KEY, type OrderSummary } from '@/lib/paypal/summary';
 
@@ -13,7 +16,12 @@ export function OrderConfirmation() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(LAST_ORDER_KEY);
-      setOrder(raw ? (JSON.parse(raw) as OrderSummary) : null);
+      const parsed = raw ? (JSON.parse(raw) as OrderSummary) : null;
+      setOrder(parsed);
+      // claimPurchase guards against a refresh or back-navigation re-reporting the same revenue.
+      if (parsed?.orderId && claimPurchase(parsed.orderId, sessionStorage)) {
+        track('purchase', purchaseEvent(parsed));
+      }
     } catch {
       setOrder(null);
     }

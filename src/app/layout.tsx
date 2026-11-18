@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { CartDrawer } from '@/components/cart/CartDrawer';
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex-1">{children}</div>
         <Footer />
         <Toaster richColors position="top-center" />
+        {site.gaMeasurementId && <GoogleAnalytics gaId={site.gaMeasurementId} />}
       </body>
     </html>
   );

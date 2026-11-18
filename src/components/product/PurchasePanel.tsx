@@ -4,7 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { addToCartEvent } from '@/lib/analytics/events';
+import { track } from '@/lib/analytics/track';
 import type { Product } from '@/lib/catalog';
+import { resolveLines } from '@/lib/cart/resolve';
 import { useCart } from '@/lib/cart/store';
 import { formatCents } from '@/lib/format';
 import { VariantSelector } from './VariantSelector';
@@ -20,6 +23,12 @@ export function PurchasePanel({ product }: { product: Product }) {
 
   const variant = product.variants.find((v) => v.sku === sku) ?? firstInStock;
   const soldOut = !variant.inStock;
+
+  // Reported from here rather than the cart store, which stays pure and unit-tested.
+  function trackAdd() {
+    const [line] = resolveLines([{ sku: variant.sku, qty }]);
+    if (line) track('add_to_cart', addToCartEvent(line));
+  }
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
@@ -50,6 +59,7 @@ export function PurchasePanel({ product }: { product: Product }) {
           data-testid="add-to-cart"
           onClick={() => {
             add(variant.sku, qty);
+            trackAdd();
             open();
           }}
         >
@@ -63,6 +73,7 @@ export function PurchasePanel({ product }: { product: Product }) {
           onClick={() => {
             clear();
             add(variant.sku, qty);
+            trackAdd();
             router.push('/checkout/');
           }}
         >
