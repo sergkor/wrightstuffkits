@@ -1,5 +1,6 @@
 import type { CreateOrderRequestBody, PatchOrderRequestBody } from '@paypal/paypal-js';
 import { defaultShippingOption, getShippingOption, site } from '@/content/site';
+import { resolvesShipping } from '@/lib/paypal/funding';
 import { subtotalCents } from '@/lib/cart/pricing';
 import type { CartLine } from '@/lib/cart/resolve';
 
@@ -22,19 +23,7 @@ function amountFor(lines: CartLine[], shippingId: string) {
   };
 }
 
-// PayPal honors purchase_unit shipping options, and fires onShippingChange, only for its own
-// account-based sources. On the unbranded card flow the callback never fires for a guest buyer, so
-// the options stay unresolved and PayPal rejects the order at approval with the misleading
-// "Your order can't be shipped to this address." Card buyers therefore get no shipping choice; the
-// default option is already priced into `amount`. An unknown source is treated as card: a buyer who
-// cannot pick a shipping speed is a far smaller problem than one who cannot check out at all.
-const SHIPPING_OPTION_SOURCES = ['paypal', 'venmo'];
-
-function offersShippingOptions(fundingSource?: string): boolean {
-  return fundingSource !== undefined && SHIPPING_OPTION_SOURCES.includes(fundingSource);
-}
-
-// fundingSource is the button the buyer clicked (createOrder's data.paymentSource).
+// fundingSource is the button the buyer clicked; see lib/paypal/funding.ts for why it gates shipping.
 export function buildOrder(lines: CartLine[], shippingId: string, fundingSource?: string): CreateOrderRequestBody {
   const chosen = resolveShippingId(shippingId);
   const experience = { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' } as const;
@@ -57,7 +46,7 @@ export function buildOrder(lines: CartLine[], shippingId: string, fundingSource?
           category: 'PHYSICAL_GOODS' as const,
         })),
         amount: amountFor(lines, chosen),
-        ...(offersShippingOptions(fundingSource)
+        ...(resolvesShipping(fundingSource)
           ? {
               shipping: {
                 options: site.shippingOptions.map((o) => ({

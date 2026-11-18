@@ -42,9 +42,11 @@ describe('buildOrder', () => {
     expect(other.shipping?.options?.find((o) => o.id === 'usps-priority')?.selected).toBe(true);
   });
 
-  it('passes shipping options for the Venmo button', () => {
-    const venmo = buildOrder(lines, 'usps-ground', 'venmo').purchase_units[0];
-    expect(venmo.shipping?.options?.map((o) => o.id)).toEqual(['usps-ground', 'usps-priority']);
+  it('passes shipping options for the other account-backed buttons', () => {
+    for (const source of ['venmo', 'paylater']) {
+      const pu = buildOrder(lines, 'usps-ground', source).purchase_units[0];
+      expect(pu.shipping?.options?.map((o) => o.id), source).toEqual(['usps-ground', 'usps-priority']);
+    }
   });
 
   // PayPal never fires onShippingChange for a guest card buyer, so options left on the order stay
