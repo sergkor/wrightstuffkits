@@ -1,0 +1,55 @@
+{
+  "beginner-kit": {
+    "listing_id": 4619601494,
+    "images": [
+      "public/images/products/beginner-kit/render.png",
+      "public/images/products/beginner-kit/1.jpg",
+      "public/images/products/beginner-kit/2.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:24.468Z"
+  },
+  "classic-elliptical-package": {
+    "listing_id": 4619594129,
+    "images": [
+      "public/images/products/classic-elliptical-package/render.png",
+      "public/images/products/classic-kit/1.jpg",
+      "public/images/products/elliptical-kit/1.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:27.718Z"
+  },
+  "classic-kit": {
+    "listing_id": 4619594169,
+    "images": [
+      "public/images/products/classic-kit/render.png",
+      "public/images/products/classic-kit/1.jpg",
+      "public/images/products/classic-kit/2.jpg",
+      "public/images/products/classic-kit/3.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:31.788Z"
+  },
+  "custom-propeller": {
+    "listing_id": 4619594217,
+    "images": [
+      "public/images/products/custom-propeller/1.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:34.226Z"
+  },
+  "elliptical-kit": {
+    "listing_id": 4619594245,
+    "images": [
+      "public/images/products/elliptical-kit/render.png",
+      "public/images/products/elliptical-kit/1.jpg",
+      "public/images/products/elliptical-kit/2.jpg",
+      "public/images/products/elliptical-kit/3.jpg",
+      "public/images/products/elliptical-kit/4.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:39.065Z"
+  },
+  "propeller-kit": {
+    "listing_id": 4619601716,
+    "images": [
+      "public/images/products/propeller-kit/1.jpg"
+    ],
+    "updated_at": "2026-11-17T19:29:40.955Z"
+  }
+}

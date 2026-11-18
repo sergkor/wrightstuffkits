@@ -49,3 +49,5 @@ out/
 # playwright
 test-results/
 playwright-report/
+# etsy oauth tokens (scripts/etsy)
+/.etsy/

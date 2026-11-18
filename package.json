@@ -13,7 +13,10 @@
     "test": "vitest",
     "e2e": "npm run build && playwright test",
     "images": "node scripts/prepare-images.mjs",
-    "brand": "node scripts/prepare-brand.mjs"
+    "brand": "node scripts/prepare-brand.mjs",
+    "etsy:auth": "node --env-file-if-exists=.env.local scripts/etsy/auth.mjs",
+    "etsy:lookup": "node --env-file-if-exists=.env.local scripts/etsy/lookup.mjs",
+    "etsy:push": "node --env-file-if-exists=.env.local scripts/etsy/push-drafts.mjs"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^10.5.2",
@@ -40,6 +43,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
+    "js-yaml": "^4.3.2",
     "serve": "^14.2.6",
     "sharp": "^0.35.5",
     "tailwindcss": "^4",
