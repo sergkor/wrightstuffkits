@@ -31,7 +31,10 @@ export function CartDrawer() {
 
   return (
     <Sheet modal={false} open={isOpen} onOpenChange={(o) => (o ? open() : close())}>
-      <SheetContent side="right" className="flex w-full flex-col sm:max-w-md">
+      {/* One scroll container for the whole drawer. SheetContent is a viewport-height fixed column
+          with overflow visible by default, so a tall child — PayPal expands its card form inline
+          where the buttons are — would run past the bottom with no scrollbar anywhere. */}
+      <SheetContent side="right" className="flex w-full flex-col overflow-y-auto sm:max-w-md">
         <SheetHeader>
           <SheetTitle>Your cart</SheetTitle>
           <SheetDescription className="sr-only">Items in your cart and checkout</SheetDescription>
@@ -40,7 +43,7 @@ export function CartDrawer() {
           <p className="py-10 text-center text-muted-foreground">Your cart is empty.</p>
         ) : (
           <>
-            <ul className="flex-1 divide-y overflow-y-auto px-4">
+            <ul className="divide-y px-4">
               {lines.map((l) => (
                 <CartLineRow key={l.sku} line={l} />
               ))}

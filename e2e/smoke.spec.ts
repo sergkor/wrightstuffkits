@@ -33,6 +33,31 @@ test('home → catalog search → product → cart drawer → persists', async (
   await expect(page.getByTestId('paypal-buttons')).toBeVisible();
 });
 
+// PayPal expands its card form inline where the buttons sit. SheetContent is a viewport-height
+// fixed column, so without its own scroller that form ran past the bottom of the drawer with no
+// scrollbar anywhere and the Pay button could not be reached.
+test('cart drawer scrolls, so a tall payment panel stays reachable', async ({ page }) => {
+  await page.goto('/products/custom-propeller/');
+  await page.getByTestId('add-to-cart').click();
+  const sheet = page.locator('[data-slot="sheet-content"]');
+  await expect(sheet).toBeVisible();
+  expect(await sheet.evaluate((el) => getComputedStyle(el).overflowY)).toBe('auto');
+
+  // Stand in for PayPal expanding its form in the container that holds the buttons: content taller
+  // than the drawer must become reachable by scrolling it.
+  const reachable = await sheet.evaluate((el) => {
+    const host = el.querySelector('[data-testid="paypal-buttons"]')?.parentElement ?? el;
+    const probe = document.createElement('div');
+    probe.style.height = `${el.clientHeight + 600}px`;
+    host.appendChild(probe);
+    el.scrollTop = 99_999;
+    const scrolled = el.scrollTop > 0;
+    probe.remove();
+    return scrolled;
+  });
+  expect(reachable).toBe(true);
+});
+
 // The checkout page renders its own PayPal buttons. A cart drawer on top of it mounted a second
 // set and their hosted overlays stacked, so the drawer is suppressed there.
 test('checkout page suppresses the cart drawer, so PayPal buttons mount once', async ({ page }) => {
