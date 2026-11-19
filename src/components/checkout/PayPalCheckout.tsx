@@ -11,7 +11,15 @@ import { useCart } from '@/lib/cart/store';
 import { buildAmountPatch, buildOrder } from '@/lib/paypal/order';
 import { LAST_ORDER_KEY, summarizeOrder } from '@/lib/paypal/summary';
 
-const SDK_OPTIONS = { clientId: site.paypalClientId, currency: 'USD', intent: 'capture', components: 'buttons' };
+// enableFunding becomes enable-funding on the SDK URL. PayPal keeps widening Venmo eligibility and
+// recommends asking for it explicitly; without this the Venmo button never renders.
+const SDK_OPTIONS = {
+  clientId: site.paypalClientId,
+  currency: 'USD',
+  intent: 'capture',
+  components: 'buttons',
+  enableFunding: 'venmo',
+};
 const DECLINED_MSG = 'That payment method was declined. Please choose another.';
 const FAILED_MSG = 'PayPal could not complete the payment. Your cart is unchanged.';
 const SHIPPING_MSG = 'We could not update shipping for that address. Please try again, or email us and we will take the order by hand.';

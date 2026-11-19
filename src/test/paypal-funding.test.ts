@@ -29,6 +29,6 @@ describe('BUTTON_SOURCES', () => {
 
   it('renders the PayPal buttons that do keep the shipping picker', () => {
     const shippingAware = BUTTON_SOURCES.filter((s) => resolvesShipping(s));
-    expect([...shippingAware]).toEqual(['paypal', 'paylater']);
+    expect([...shippingAware]).toEqual(['paypal', 'paylater', 'venmo']);
   });
 });

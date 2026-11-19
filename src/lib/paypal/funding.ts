@@ -16,8 +16,11 @@ import type { FUNDING_SOURCE } from '@paypal/paypal-js';
 // so they pay a flat rate.
 export const SHIPPING_AWARE_SOURCES = ['paypal', 'paylater', 'venmo'] as const satisfies readonly FUNDING_SOURCE[];
 
-// The buttons the checkout renders, each as its own instance so the card button can differ.
-export const BUTTON_SOURCES = ['paypal', 'paylater', 'card'] as const satisfies readonly FUNDING_SOURCE[];
+// The buttons the checkout renders, each as its own instance so the card button can differ. Venmo
+// needs enable-funding=venmo on the SDK options to be eligible at all, and even then it requires a
+// US buyer with the Venmo app — desktop buyers scan a QR code. An ineligible source renders
+// nothing, so listing it here is safe.
+export const BUTTON_SOURCES = ['paypal', 'paylater', 'venmo', 'card'] as const satisfies readonly FUNDING_SOURCE[];
 
 // An unknown or missing source is treated as card: a buyer who cannot pick a shipping speed is a far
 // smaller problem than one who cannot check out at all.

@@ -13,6 +13,14 @@ export const VariantSchema = z.object({
   label: z.string().min(1),
   priceCents: z.number().int().positive(),
   inStock: z.boolean().default(true),
+  // Optional id of a PayPal no-code payment button (Payment Links & Buttons → Button Builder),
+  // offered as a fallback for buyers the JS SDK checkout fails. PayPal holds the price, so it can
+  // drift from priceCents silently: re-create the button whenever the price here changes.
+  // Not the retired _s-xclick hosted buttons — those stop working before January 2027.
+  hostedButtonId: z
+    .string()
+    .regex(/^[A-Za-z0-9]{6,}$/, 'hostedButtonId must be the alphanumeric id from PayPal')
+    .optional(),
 });
 
 export const ProductSchema = z.object({

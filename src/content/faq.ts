@@ -11,4 +11,8 @@ export const faq: FaqItem[] = [
   { q: 'How do I send my custom propeller design?', a: 'After paying, email the design (DXF preferred, or any image with a size) and your PayPal order ID to the address shown on the confirmation page.' },
   { q: 'What is your return policy?', a: 'Unopened kits can be returned within 30 days for a refund minus shipping. Custom propellers are made to order and cannot be returned. If anything arrives damaged, email us within 7 days with photos and we will replace it.' },
   { q: 'Do you charge sales tax?', a: 'Tax, where required, is calculated by PayPal at checkout.' },
+  {
+    q: 'Can our school pay by purchase order or check?',
+    a: 'Yes. Use the "Need an invoice or purchase order?" link on the checkout page and we will send an invoice you can raise a PO against. We ship once payment clears.',
+  },
 ];

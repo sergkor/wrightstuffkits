@@ -45,6 +45,40 @@ order that still carries shipping options is refused at approval with "Your orde
 The site therefore sends no shipping options on that flow and charges the default option (USPS Ground Advantage) flat.
 If you change which option is the default in `src/content/site.ts`, that is what every card buyer pays.
 
+## 6b. Venmo
+
+The SDK asks for Venmo via `enable-funding=venmo`, so the button appears whenever PayPal considers
+the buyer eligible: US merchant, US buyer, USD, and the Venmo app installed. Desktop buyers scan a
+QR code with the app. If Venmo is off for your account, enable it under Account Settings → Payment
+preferences; an ineligible buyer simply never sees the button, which needs no handling here.
+
+## 6c. Hosted buttons (the "Pay on PayPal instead" fallback)
+
+These bypass the JS SDK completely, so a buyer whose card checkout fails still has a way to pay, and
+PayPal collects the shipping address on its own page. One button per variant, created by you:
+
+1. paypal.com → **Pay & Get Paid → PayPal Buttons** (Payment Links & Buttons) → **Button Builder**.
+2. Build a **Buy Now** button for one variant. Set the item name and price to match
+   `src/content/products/<product>.ts` exactly, and turn **on** shipping address collection.
+3. Copy the id out of the generated snippet's URL — `https://www.paypal.com/ncp/payment/<ID>`.
+4. Put it on that variant as `hostedButtonId: '<ID>'`. The button only renders where an id exists,
+   so you can add them one at a time.
+
+**PayPal holds the price, not this repo.** Nothing checks that they agree, and the fallback button
+deliberately shows no amount. Whenever you change a `priceCents`, re-create that button and update
+its id, or buyers will be charged the old price.
+
+Do **not** use the older "Website Payments Standard" buttons (`cgi-bin/webscr`, `cmd=_s-xclick`).
+PayPal is retiring them before January 2027.
+
+## 6d. Invoices and purchase orders
+
+Schools and clubs frequently cannot pay by card and need an invoice to raise a PO. The checkout page
+offers "Need an invoice or purchase order?", which opens a prefilled email to `contactEmail` with the
+cart, an items total, and blanks for organization, PO number, and shipping address. Shipping is left
+for you to add, since the site never computes it. There is no automation behind this: you invoice
+from PayPal (Pay & Get Paid → Invoicing) or however you prefer, and ship when payment clears.
+
 ## 7. Verify every order before shipping
 
 1. Open the transaction in PayPal → Activity.

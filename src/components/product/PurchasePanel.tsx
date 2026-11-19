@@ -10,6 +10,7 @@ import type { Product } from '@/lib/catalog';
 import { resolveLines } from '@/lib/cart/resolve';
 import { useCart } from '@/lib/cart/store';
 import { formatCents } from '@/lib/format';
+import { HostedPayPalButton } from './HostedPayPalButton';
 import { VariantSelector } from './VariantSelector';
 
 export function PurchasePanel({ product }: { product: Product }) {
@@ -84,6 +85,7 @@ export function PurchasePanel({ product }: { product: Product }) {
         Pay with PayPal to choose your shipping speed; card checkout ships USPS Ground Advantage. Any tax is applied by
         PayPal. US addresses only.
       </p>
+      {variant.hostedButtonId && <HostedPayPalButton hostedButtonId={variant.hostedButtonId} />}
     </div>
   );
 }

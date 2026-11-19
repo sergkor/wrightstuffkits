@@ -9,6 +9,7 @@ import { beginCheckoutEvent } from '@/lib/analytics/events';
 import { track } from '@/lib/analytics/track';
 import { useCartLines } from '@/lib/cart/hooks';
 import { useCart } from '@/lib/cart/store';
+import { InvoiceRequest } from './InvoiceRequest';
 import { PayPalCheckout } from './PayPalCheckout';
 
 export function CheckoutView() {
@@ -43,6 +44,7 @@ export function CheckoutView() {
         <CartSummary lines={lines} />
         <ShippingNote />
         <PayPalCheckout />
+        <InvoiceRequest lines={lines} />
       </aside>
     </div>
   );
