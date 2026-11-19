@@ -76,8 +76,40 @@ PayPal is retiring them before January 2027.
 Schools and clubs frequently cannot pay by card and need an invoice to raise a PO. The checkout page
 offers "Need an invoice or purchase order?", which opens a prefilled email to `contactEmail` with the
 cart, an items total, and blanks for organization, PO number, and shipping address. Shipping is left
-for you to add, since the site never computes it. There is no automation behind this: you invoice
-from PayPal (Pay & Get Paid → Invoicing) or however you prefer, and ship when payment clears.
+for you to add, since the site never computes it. There is no automation behind this: the request
+arrives as an ordinary email and you invoice by hand.
+
+A PayPal invoice also solves "we want to pay by card": its Pay button accepts a debit or credit card
+from someone with no PayPal account, and it is a different product from the site's checkout, so none
+of the JS SDK's card-flow problems apply to it.
+
+### Building the invoice
+
+1. paypal.com → **Pay & Get Paid → Invoicing → Create invoice**.
+2. **Bill to**: the billing contact and email from their request. Leave your own business name and
+   logo as configured under Invoicing → Settings so receipts look consistent.
+3. **Items**: one line per line in their email. Copy the item name, and set the unit price from
+   `src/content/products/<product>.ts` — not from the email, which is only as current as the day
+   they loaded the page. Put the SKU in the line's description so §7 below can be carried out.
+4. **Shipping**: add it as its own line, named for the service (for example "USPS Ground Advantage").
+   Use the rates in `src/content/site.ts`, or the real postage if this order is heavy or awkward —
+   nothing reconciles the two, so the invoice is the final word.
+5. **Sales tax**: only if you have tax configured for that state (§5). The site never computes tax,
+   so do not re-add it by hand if PayPal is already applying it.
+6. **Reference / PO number**: their purchase order number, if they gave one. Schools usually need it
+   on the invoice itself before they can pay.
+7. **Shipping address**: put the address from their email on the invoice. Do this even though it
+   feels redundant — Seller Protection covers you only for the address on the transaction (§8).
+8. **Note to the buyer**: payment terms, and for a custom propeller order, ask for the design file
+   (DXF preferred, or an image with a size) in reply to the invoice.
+9. **Due date**: net 30 suits school purchasing cycles; shorter if you are holding stock for them.
+10. Send it. PayPal emails them a payable link and emails you when it is paid, which is your order
+    record (§5). Unpaid invoices sit under Invoicing with a reminder button.
+
+Ship only once payment clears, then follow §7 to check the invoice against the catalogue before the
+parcel goes out. Invoices are free to send; the card fee comes off the payment — check your own
+rate under [PayPal's fee schedule](https://www.paypal.com/us/business/paypal-business-fees), since
+guest card payments and direct card payments are priced differently.
 
 ## 7. Verify every order before shipping
 
