@@ -13,6 +13,6 @@ Comes with materials to build 2 propellers plus a ready-to-use 24 cm PVC propell
     { src: '/images/products/classic-elliptical-package/render.png', alt: 'Elliptical Kit and Classic Kit renderings, split diagonally' },
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'PKG-CLS-ELL', label: 'Default', priceCents: 8499 }],
+  variants: [{ sku: 'PKG-CLS-ELL', label: 'Default', priceCents: 8499, inStock: false }],
   tags: ['science olympiad', 'division c', 'package', 'bundle', 'classic', 'elliptical'],
 };

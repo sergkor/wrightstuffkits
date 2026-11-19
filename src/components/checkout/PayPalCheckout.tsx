@@ -5,6 +5,7 @@ import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
+import { orderingPause } from '@/content/ordering';
 import { defaultShippingOption, site } from '@/content/site';
 import { useCartLines } from '@/lib/cart/hooks';
 import { useCart } from '@/lib/cart/store';
@@ -36,6 +37,18 @@ export function PayPalCheckout() {
   // The ref guards callbacks synchronously; the state mirror drives rendering.
   const paidRef = useRef(false);
   const [paid, setPaid] = useState(false);
+
+  // A cart persists in the buyer's browser, so someone can reach checkout with items added before
+  // the pause. Sold-out labels alone would not stop them paying for stock we do not have. Still let
+  // a buyer mid-payment through, so a capture already in flight can finish and show its receipt.
+  if (orderingPause && !paid) {
+    return (
+      <div data-testid="paypal-buttons" className="space-y-1">
+        <p role="status" className="text-sm font-medium">{orderingPause.heading}</p>
+        <p className="text-sm text-muted-foreground">{orderingPause.body}</p>
+      </div>
+    );
+  }
 
   if (lines.length === 0) {
     if (!paid) return null;

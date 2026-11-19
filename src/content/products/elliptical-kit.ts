@@ -19,6 +19,6 @@ Step-by-step instructions cover assembly, motor making, winding tips, and trimmi
     { src: '/images/products/elliptical-kit/4.jpg', alt: 'Elliptical Kit front view with balsa propeller' },
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'ELL-KIT', label: 'Default', priceCents: 7599 }],
+  variants: [{ sku: 'ELL-KIT', label: 'Default', priceCents: 7599, inStock: false }],
   tags: ['science olympiad', 'division c', 'mylar', 'carbon', 'elliptical'],
 };

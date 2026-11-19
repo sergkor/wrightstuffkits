@@ -5,6 +5,7 @@ import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartHydration } from '@/components/cart/CartHydration';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { OrderingNotice } from '@/components/layout/OrderingNotice';
 import { Toaster } from '@/components/ui/sonner';
 import { site } from '@/content/site';
 import { cn } from '@/lib/utils';
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartHydration />
         <Header />
         <CartDrawer />
+        <OrderingNotice />
         <div className="flex-1">{children}</div>
         <Footer />
         <Toaster richColors position="top-center" />

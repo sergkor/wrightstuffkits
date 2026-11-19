@@ -14,11 +14,11 @@ After ordering, email your design in any format (DXF preferred; an image works i
   notIncluded: ['Super glue (CA)'],
   optionLabel: 'Number of sets',
   variants: [
-    { sku: 'CPROP-2', label: '2 sets', priceCents: 1299 },
-    { sku: 'CPROP-3', label: '3 sets', priceCents: 1699 },
-    { sku: 'CPROP-4', label: '4 sets', priceCents: 2099 },
-    { sku: 'CPROP-5', label: '5 sets', priceCents: 2499 },
-    { sku: 'CPROP-6', label: '6 sets', priceCents: 2899 },
+    { sku: 'CPROP-2', label: '2 sets', priceCents: 1299, inStock: false },
+    { sku: 'CPROP-3', label: '3 sets', priceCents: 1699, inStock: false },
+    { sku: 'CPROP-4', label: '4 sets', priceCents: 2099, inStock: false },
+    { sku: 'CPROP-5', label: '5 sets', priceCents: 2499, inStock: false },
+    { sku: 'CPROP-6', label: '6 sets', priceCents: 2899, inStock: false },
   ],
   postPurchaseNote:
     'Email your propeller design (DXF preferred, or any image plus a size) and your PayPal order ID to {contactEmail}.',

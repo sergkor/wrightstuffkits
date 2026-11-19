@@ -8,6 +8,6 @@ export const propellerKit: ProductInput = {
   description: `Includes materials and a jig to build 2 balsa wood propellers for Science Olympiad models using 1/32" balsa. Optimized design made for maximum flight time. Includes a hub with an adjustable pitch angle.`,
   images: [{ src: '/images/products/propeller-kit/1.jpg', alt: 'Finished balsa propeller with adjustable hub' }],
   notIncluded: ['Super glue (CA)', 'Hobby knife'],
-  variants: [{ sku: 'PROP-KIT', label: 'Default', priceCents: 699 }],
+  variants: [{ sku: 'PROP-KIT', label: 'Default', priceCents: 699, inStock: false }],
   tags: ['propeller', 'balsa', 'hub'],
 };

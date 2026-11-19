@@ -17,6 +17,6 @@ Step-by-step instructions cover assembly, motor making, winding tips, and trimmi
     { src: '/images/products/beginner-kit/2.jpg', alt: 'Beginner Kit built plane with PVC propeller' },
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'BEG-KIT', label: 'Default', priceCents: 4999 }],
+  variants: [{ sku: 'BEG-KIT', label: 'Default', priceCents: 4999, inStock: false }],
   tags: ['science olympiad', 'division c', 'tissue', 'beginner', 'pvc'],
 };

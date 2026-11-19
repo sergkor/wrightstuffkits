@@ -18,6 +18,6 @@ Step-by-step instructions cover assembly, motor making, winding tips, and trimmi
     { src: '/images/products/classic-kit/3.jpg', alt: 'Classic Kit with balsa propeller and fin' },
   ],
   notIncluded: ['Super glue (CA)', 'Hobby knife', 'Spray adhesive', 'Pliers', 'Winder'],
-  variants: [{ sku: 'CLS-KIT', label: 'Default', priceCents: 7599 }],
+  variants: [{ sku: 'CLS-KIT', label: 'Default', priceCents: 7599, inStock: false }],
   tags: ['science olympiad', 'division c', 'mylar', 'carbon', 'classic'],
 };
