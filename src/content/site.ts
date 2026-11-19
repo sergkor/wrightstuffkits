@@ -12,7 +12,7 @@ export const site = {
   domain: 'wrightstuffkits.com',
   url: 'https://wrightstuffkits.com',
   tagline: 'Free-flight kits and propeller supplies',
-  // Placeholder. Replace before launch (see docs/PAYPAL_SETUP.md checklist).
+  // Live inbox. Receipts, custom-propeller design files, and invoice/PO requests all land here.
   contactEmail: 'orders@wrightstuffkits.com',
   usOnly: true,
   shippingOptions: [

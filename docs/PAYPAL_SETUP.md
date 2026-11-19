@@ -96,7 +96,8 @@ Create a new app, update the `PAYPAL_CLIENT_ID` secret, re-run the workflow, con
 
 ## Checklist before first live sale
 
-- [ ] `contactEmail` and shipping rates set in `src/content/site.ts`
+- [x] `contactEmail` set in `src/content/site.ts` (orders@wrightstuffkits.com, live)
+- [ ] Shipping rates in `src/content/site.ts` match what USPS actually costs you
 - [ ] Live Client ID in GitHub secret and deployed
 - [ ] Custom domain and HTTPS enabled in GitHub Pages
 - [ ] One real purchase of the cheapest item from a second PayPal account, then refunded
